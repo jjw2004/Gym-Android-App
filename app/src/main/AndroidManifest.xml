@@ -17,6 +17,10 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".activities.WorkoutListActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".activities.MainActivity"
             android:exported="true">
 
