@@ -16,7 +16,7 @@
             android:id="@+id/formTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log Workout"
+            android:text="@string/log_workout"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Gym name"
+            android:hint="@string/hint_gym_name"
             android:inputType="textCapWords" />
 
         <Button
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Exercises"
+            android:text="@string/exercises"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -56,20 +56,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Add Exercise" />
+            android:text="@string/add_exercise" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Save" />
+            android:text="@string/save" />
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Cancel" />
+            android:text="@string/cancel" />
     </LinearLayout>
 </ScrollView>

@@ -17,7 +17,7 @@
             android:id="@+id/workoutsTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="My Workouts"
+            android:text="@string/my_workouts"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="24dp"
-            android:text="No workouts logged yet."
+            android:text="@string/no_workouts"
             android:textSize="18sp"
             android:visibility="gone" />
 
@@ -41,6 +41,6 @@
             android:id="@+id/returnButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Back to Menu" />
+            android:text="@string/back_to_menu" />
     </LinearLayout>
 </FrameLayout>

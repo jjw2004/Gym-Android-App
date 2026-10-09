@@ -1,5 +1,6 @@
 package ie.setu.gymtracker.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,11 +64,13 @@ class WorkoutAdapter(
         holder.dateText.text =
             workout.date.toString()
 
+        val context = holder.itemView.context
+
         holder.exercisesText.text =
             if (workout.exercises.isEmpty()) {
-                "(no exercises)"
+                context.getString(R.string.no_exercises)
             } else {
-                workout.exercises.joinToString("\n") { describe(it) }
+                workout.exercises.joinToString("\n") { describe(context, it) }
             }
 
         holder.editButton.setOnClickListener {
@@ -88,8 +91,19 @@ class WorkoutAdapter(
         notifyDataSetChanged()
     }
 
-    private fun describe(exercise: ExerciseModel): String {
-        val weight = if (exercise.weightKg > 0) "@ ${exercise.weightKg}kg" else "(bodyweight)"
-        return "• ${exercise.name}: ${exercise.sets} x ${exercise.reps} $weight"
+    private fun describe(context: Context, exercise: ExerciseModel): String {
+        val weight =
+            if (exercise.weightKg > 0) {
+                context.getString(R.string.exercise_weight, exercise.weightKg.toString())
+            } else {
+                context.getString(R.string.exercise_bodyweight)
+            }
+        return context.getString(
+            R.string.exercise_summary,
+            exercise.name,
+            exercise.sets,
+            exercise.reps,
+            weight
+        )
     }
 }

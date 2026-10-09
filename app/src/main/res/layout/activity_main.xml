@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="GymTracker"
+            android:text="@string/app_name"
             android:textSize="32sp"
             android:textStyle="bold" />
 
@@ -30,14 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="View Workouts" />
+            android:text="@string/view_workouts" />
 
         <Button
             android:id="@+id/logWorkoutButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Log Workout" />
+            android:text="@string/log_workout" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

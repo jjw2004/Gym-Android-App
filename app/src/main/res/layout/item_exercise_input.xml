@@ -9,7 +9,7 @@
         android:id="@+id/exerciseNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Exercise (e.g. Bench Press)"
+        android:hint="@string/hint_exercise_name"
         android:inputType="textCapWords" />
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Sets"
+            android:hint="@string/hint_sets"
             android:inputType="number" />
 
         <EditText
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Reps"
+            android:hint="@string/hint_reps"
             android:inputType="number" />
 
         <EditText
@@ -38,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Weight (kg)"
+            android:hint="@string/hint_weight"
             android:inputType="numberDecimal" />
     </LinearLayout>
 
@@ -47,5 +47,5 @@
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Remove Exercise" />
+        android:text="@string/remove_exercise" />
 </LinearLayout>

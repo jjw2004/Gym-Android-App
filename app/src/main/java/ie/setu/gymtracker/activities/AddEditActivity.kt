@@ -66,7 +66,7 @@ class AddEditActivity : AppCompatActivity() {
         if (editingId != null) {
 
             findViewById<TextView>(R.id.formTitle)
-                .text = "Edit Workout"
+                .text = getString(R.string.edit_workout)
 
             loadExistingWorkout(editingId!!)
         } else {
@@ -107,7 +107,7 @@ class AddEditActivity : AppCompatActivity() {
     }
 
     private fun updateDateButton() {
-        dateButton.text = "Date: $selectedDate"
+        dateButton.text = getString(R.string.date_label, selectedDate.toString())
     }
 
     private fun addExerciseRow(exercise: ExerciseModel? = null) {
@@ -148,7 +148,7 @@ class AddEditActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Workout not found",
+                getString(R.string.workout_not_found),
                 Toast.LENGTH_SHORT
             ).show()
 
@@ -176,14 +176,14 @@ class AddEditActivity : AppCompatActivity() {
             val sets = row.setsInput.text.toString().toIntOrNull()
 
             if (sets == null || sets <= 0) {
-                row.setsInput.error = "Enter sets"
+                row.setsInput.error = getString(R.string.error_enter_sets)
                 return null
             }
 
             val reps = row.repsInput.text.toString().toIntOrNull()
 
             if (reps == null || reps <= 0) {
-                row.repsInput.error = "Enter reps"
+                row.repsInput.error = getString(R.string.error_enter_reps)
                 return null
             }
 
@@ -192,7 +192,7 @@ class AddEditActivity : AppCompatActivity() {
             val weightKg = if (weightText.isEmpty()) 0.0 else weightText.toDoubleOrNull()
 
             if (weightKg == null) {
-                row.weightInput.error = "Enter a valid number"
+                row.weightInput.error = getString(R.string.error_invalid_number)
                 return null
             }
 
@@ -208,7 +208,7 @@ class AddEditActivity : AppCompatActivity() {
             gymNameInput.text.toString().trim()
 
         if (gymName.isEmpty()) {
-            gymNameInput.error = "Gym name is required"
+            gymNameInput.error = getString(R.string.error_gym_name_required)
             return
         }
 
@@ -226,7 +226,7 @@ class AddEditActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Workout logged",
+                getString(R.string.workout_logged),
                 Toast.LENGTH_SHORT
             ).show()
 
@@ -243,7 +243,7 @@ class AddEditActivity : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Workout updated",
+                getString(R.string.workout_updated),
                 Toast.LENGTH_SHORT
             ).show()
         }
