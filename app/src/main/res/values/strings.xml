@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">GymTracker</string>
+
+    <!-- Main menu -->
+    <string name="view_workouts">View Workouts</string>
+    <string name="log_workout">Log Workout</string>
+
+    <!-- Workout list -->
+    <string name="my_workouts">My Workouts</string>
+    <string name="no_workouts">No workouts logged yet.</string>
+    <string name="back_to_menu">Back to Menu</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="no_exercises">(no exercises)</string>
+    <!-- e.g. "• Bench Press: 3 x 10 @ 60.0kg" -->
+    <string name="exercise_summary">• %1$s: %2$d x %3$d %4$s</string>
+    <string name="exercise_weight">\@ %1$skg</string>
+    <string name="exercise_bodyweight">(bodyweight)</string>
+
+    <!-- Add / edit workout form -->
+    <string name="edit_workout">Edit Workout</string>
+    <string name="hint_gym_name">Gym name</string>
+    <string name="date_label">Date: %1$s</string>
+    <string name="exercises">Exercises</string>
+    <string name="add_exercise">Add Exercise</string>
+    <string name="remove_exercise">Remove Exercise</string>
+    <string name="hint_exercise_name">Exercise (e.g. Bench Press)</string>
+    <string name="hint_sets">Sets</string>
+    <string name="hint_reps">Reps</string>
+    <string name="hint_weight">Weight (kg)</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Form messages -->
+    <string name="error_gym_name_required">Gym name is required</string>
+    <string name="error_enter_sets">Enter sets</string>
+    <string name="error_enter_reps">Enter reps</string>
+    <string name="error_invalid_number">Enter a valid number</string>
+    <string name="workout_not_found">Workout not found</string>
+    <string name="workout_logged">Workout logged</string>
+    <string name="workout_updated">Workout updated</string>
 </resources>
