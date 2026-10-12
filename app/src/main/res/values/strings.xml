@@ -39,4 +39,11 @@
     <string name="workout_not_found">Workout not found</string>
     <string name="workout_logged">Workout logged</string>
     <string name="workout_updated">Workout updated</string>
+
+    <!-- filtering -->
+    <string name="filter_by_date">Filter by Date</string>
+    <string name="show_all">Show All</string>
+    <string name="showing_date">Showing workouts on %1$s</string>
+    <string name="no_workouts_on_date">No workouts on this date.</string>
+
 </resources>
