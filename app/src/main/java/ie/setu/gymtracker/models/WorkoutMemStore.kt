@@ -1,5 +1,6 @@
 package ie.setu.gymtracker.models
 
+import java.time.LocalDate
 import java.util.concurrent.atomic.AtomicLong
 
 class WorkoutMemStore : WorkoutStore {
@@ -40,5 +41,9 @@ class WorkoutMemStore : WorkoutStore {
 
     override fun delete(id: Long): Boolean {
         return workouts.removeIf { w -> w.id == id }
+    }
+
+    override fun findByDate(date: LocalDate): List<WorkoutModel> {
+        return workouts.filter { w -> w.date == date }
     }
 }
