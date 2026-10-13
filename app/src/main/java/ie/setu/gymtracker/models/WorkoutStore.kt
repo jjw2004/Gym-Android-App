@@ -1,4 +1,5 @@
 package ie.setu.gymtracker.models
+import java.sql.Date
 import java.time.LocalDate
 interface WorkoutStore {
     fun findAll(): List<WorkoutModel>
@@ -8,4 +9,5 @@ interface WorkoutStore {
     fun update(workout: WorkoutModel): Boolean
     fun delete(id: Long): Boolean
     fun findByDate(date: LocalDate): List<WorkoutModel>
+    fun search(gymName: String, date: LocalDate?): List<WorkoutModel>
 }
