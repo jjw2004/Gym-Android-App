@@ -14,6 +14,8 @@ import ie.setu.gymtracker.R
 import ie.setu.gymtracker.adapters.WorkoutAdapter
 import ie.setu.gymtracker.models.WorkoutModel
 import java.time.LocalDate
+import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 
 class WorkoutListActivity : AppCompatActivity() {
 
@@ -24,7 +26,11 @@ class WorkoutListActivity : AppCompatActivity() {
     private lateinit var clearFilterButton: Button
     private lateinit var filterText: TextView
 
-    private var filterDate: LocalDate? = null   // null = no filter, show everything
+    private lateinit var searchInput: EditText
+
+    // the two filters - the list only shows workouts that match both
+    private var filterDate: LocalDate? = null   // null = no date picked, any date
+    private var searchText = ""                 // "" = nothing typed, any gym
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +47,24 @@ class WorkoutListActivity : AppCompatActivity() {
         clearFilterButton = findViewById(R.id.clearFilterButton)
         filterText = findViewById(R.id.filterText)
 
+        searchInput = findViewById(R.id.searchInput)
+
+        // doAfterTextChanged runs this code every time the text in the search bar changes,
+        // so the list updates as you type
+        searchInput.doAfterTextChanged { text ->
+            // text can be null: ?. skips the call if it is, and orEmpty() turns null into ""
+            searchText = text?.toString()?.trim().orEmpty()
+            refreshList()
+        }
+
         filterDateButton.setOnClickListener {
             showDatePicker()
         }
 
+        // "Show All" turns off both filters
         clearFilterButton.setOnClickListener {
             filterDate = null
+            searchInput.setText("")   // emptying the box also clears searchText via the listener above
             refreshList()
         }
 
@@ -84,32 +102,37 @@ class WorkoutListActivity : AppCompatActivity() {
         }
     }
 
-    /** Newest workouts first. */
+    /** Workouts matching the search and date filter, newest first. */
     private fun loadWorkouts(): List<WorkoutModel> {
-        val date = filterDate
-        val workouts =
-            if (date == null) AppData.workouts.findAll()
-            else AppData.workouts.findByDate(date)
-
-        return workouts.sortedByDescending { it.date }
+        // the store does the filtering - with no search and no date it returns everything
+        return AppData.workouts.search(searchText, filterDate)
+            .sortedByDescending { it.date }
     }
 
+    /** Reloads the list and shows/hides the label, Show All button and empty message. */
     private fun refreshList() {
         val workouts = loadWorkouts()
         adapter.updateWorkouts(workouts)
 
+        // copy into a val so Kotlin knows it can't change between the null check and using it
         val date = filterDate
         if (date == null) {
             filterText.visibility = View.GONE
-            clearFilterButton.visibility = View.GONE
-            emptyText.text = getString(R.string.no_workouts)
         } else {
             filterText.text = getString(R.string.showing_date, date.toString())
             filterText.visibility = View.VISIBLE
-            clearFilterButton.visibility = View.VISIBLE
-            emptyText.text = getString(R.string.no_workouts_on_date)
         }
 
+        // true if either filter is switched on
+        val filtering = date != null || searchText.isNotEmpty()
+
+        // only show "Show All" when there's something to clear
+        clearFilterButton.visibility = if (filtering) View.VISIBLE else View.GONE
+
+        // different empty message depending on whether you're filtering or not
+        emptyText.text = getString(
+            if (filtering) R.string.no_matching_workouts else R.string.no_workouts
+        )
         emptyText.visibility = if (workouts.isEmpty()) View.VISIBLE else View.GONE
     }
 
@@ -130,7 +153,9 @@ class WorkoutListActivity : AppCompatActivity() {
         refreshList()
     }
 
+    /** Opens a calendar; picking a day sets the date filter. */
     private fun showDatePicker() {
+        // open the calendar on the current filter date, or today if there isn't one
         val start = filterDate ?: LocalDate.now()
 
         DatePickerDialog(

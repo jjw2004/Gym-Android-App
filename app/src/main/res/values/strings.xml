@@ -44,6 +44,9 @@
     <string name="filter_by_date">Filter by Date</string>
     <string name="show_all">Show All</string>
     <string name="showing_date">Showing workouts on %1$s</string>
-    <string name="no_workouts_on_date">No workouts on this date.</string>
+
+    <!-- searching -->
+    <string name="search_hint">Search by gym</string>
+    <string name="no_matching_workouts">No workouts match your search.</string>
 
 </resources>

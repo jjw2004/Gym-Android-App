@@ -21,6 +21,16 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
+        <!-- search box: actionSearch turns the keyboard's Enter key into a search key -->
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_hint"
+            android:inputType="textCapWords"
+            android:imeOptions="actionSearch"
+            android:importantForAutofill="no" />
+
         <!-- filter buttons, side by side -->
         <LinearLayout
             android:layout_width="match_parent"

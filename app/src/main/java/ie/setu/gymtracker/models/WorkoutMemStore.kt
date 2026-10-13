@@ -44,11 +44,19 @@ class WorkoutMemStore : WorkoutStore {
     }
 
     override fun findByDate(date: LocalDate): List<WorkoutModel> {
+        // filter keeps only the workouts where the { } part is true
         return workouts.filter { w -> w.date == date }
     }
 
-    override fun search(gymName: String, date: LocalDate?): List<WorkoutModel> { //LocalDate? means the date is optional so null means any date
-        return workouts.filter { w -> w.gymName.contains(gymName, ignoreCase = true) &&
-                (date ==null || w.date == date)}
-    } //an empty search just returns everything, so
+    // LocalDate? means the date is optional, so null means "any date".
+    // An empty gymName matches every gym, because "Xtreme CSC".contains("") is true,
+    // so search("", null) just returns everything.
+    override fun search(gymName: String, date: LocalDate?): List<WorkoutModel> {
+        return workouts.filter { w ->
+            // keep it if the gym name matches (ignoring capitals) AND
+            // either no date was picked or the dates are the same
+            w.gymName.contains(gymName, ignoreCase = true) &&
+                (date == null || w.date == date)
+        }
+    }
 }
