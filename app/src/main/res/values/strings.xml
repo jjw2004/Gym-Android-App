@@ -49,4 +49,7 @@
     <string name="search_hint">Search by gym</string>
     <string name="no_matching_workouts">No workouts match your search.</string>
 
+    <!-- delete confirmation -->
+    <string name="delete_title">Delete workout?</string>
+    <string name="delete_message">Your workout at %1$s on %2$s will be removed. This cannot be undone.</string>
 </resources>

@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- GymTracker colours -->
+    <color name="gym_background">#FF101418</color>
+    <color name="gym_card">#FF1B2127</color>
+    <color name="gym_green">#FF00E676</color>
+    <color name="gym_text">#FFFFFFFF</color>
+    <color name="gym_text_secondary">#FFA0A8B0</color>
 </resources>

@@ -16,6 +16,7 @@ import ie.setu.gymtracker.models.WorkoutModel
 import java.time.LocalDate
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class WorkoutListActivity : AppCompatActivity() {
 
@@ -146,11 +147,22 @@ class WorkoutListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    /** Asks "are you sure?" first, and only deletes if the user taps Delete. */
     private fun deleteWorkout(workout: WorkoutModel) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.delete_title)
+            .setMessage(getString(R.string.delete_message, workout.gymName, workout.date.toString()))
 
-        AppData.workouts.delete(workout.id)
+            // Cancel: null means "do nothing" - the dialog just closes
+            .setNegativeButton(R.string.cancel, null)
 
-        refreshList()
+            // Delete: this code only runs if the user taps Delete
+            .setPositiveButton(R.string.delete) { _, _ ->
+                AppData.workouts.delete(workout.id)
+                refreshList()
+            }
+
+            .show()
     }
 
     /** Opens a calendar; picking a day sets the date filter. */
