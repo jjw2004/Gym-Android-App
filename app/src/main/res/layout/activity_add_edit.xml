@@ -43,6 +43,13 @@
             android:text="@string/exercises"
             android:textSize="20sp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/wgerCredit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wger_credit"
+            android:textColor="@color/gym_text_secondary"
+            android:textSize="12sp" />
 
         <!-- one item_exercise_input row is inflated in here per exercise -->
         <LinearLayout
