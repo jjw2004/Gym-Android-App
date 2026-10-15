@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- GymTracker colours - LIGHT mode.
+         Dark mode versions (same names) are in values-night/colors.xml,
+         and Android picks the right file automatically. -->
+    <color name="gym_background">#FFFFFFFF</color>      <!-- white -->
+    <color name="gym_card">#FFF1F3F4</color>            <!-- light grey so cards show on white -->
+    <color name="gym_green">#FF00A152</color>           <!-- darker green, readable on white -->
+    <color name="gym_text">#FF000000</color>            <!-- black -->
+    <color name="gym_text_secondary">#FF424242</color>  <!-- dark grey -->
 </resources>

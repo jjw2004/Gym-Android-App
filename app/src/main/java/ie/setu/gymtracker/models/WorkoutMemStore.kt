@@ -1,5 +1,6 @@
 package ie.setu.gymtracker.models
 
+import java.time.LocalDate
 import java.util.concurrent.atomic.AtomicLong
 
 class WorkoutMemStore : WorkoutStore {
@@ -40,5 +41,22 @@ class WorkoutMemStore : WorkoutStore {
 
     override fun delete(id: Long): Boolean {
         return workouts.removeIf { w -> w.id == id }
+    }
+
+    override fun findByDate(date: LocalDate): List<WorkoutModel> {
+        // filter keeps only the workouts where the { } part is true
+        return workouts.filter { w -> w.date == date }
+    }
+
+    // LocalDate? means the date is optional, so null means "any date".
+    // An empty gymName matches every gym, because "Xtreme CSC".contains("") is true,
+    // so search("", null) just returns everything.
+    override fun search(gymName: String, date: LocalDate?): List<WorkoutModel> {
+        return workouts.filter { w ->
+            // keep it if the gym name matches (ignoring capitals) AND
+            // either no date was picked or the dates are the same
+            w.gymName.contains(gymName, ignoreCase = true) &&
+                (date == null || w.date == date)
+        }
     }
 }

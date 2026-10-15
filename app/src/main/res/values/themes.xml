@@ -1,8 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- One theme for light AND dark mode: DayNight switches Android's defaults,
+         and the @color/gym_... values come from values/ or values-night/ automatically -->
     <style name="Base.Theme.GymTracker" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- buttons -->
+        <item name="colorPrimary">@color/gym_green</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <!-- screen background -->
+        <item name="android:colorBackground">@color/gym_background</item>
+        <item name="colorSurface">@color/gym_background</item>
+
+        <!-- text -->
+        <item name="colorOnSurface">@color/gym_text</item>
+        <item name="colorOnBackground">@color/gym_text</item>
+        <item name="android:textColorPrimary">@color/gym_text</item>
+        <item name="android:textColorSecondary">@color/gym_text_secondary</item>
+        <item name="android:textColorTertiary">@color/gym_text</item>
+
+        <!-- whatever you're using right now: cursor, typing underline, picked calendar day -->
+        <item name="colorControlActivated">@color/gym_green</item>
+        <item name="android:colorControlActivated">@color/gym_green</item>
+
+        <!-- dark status bar icons in light mode, white in dark mode (values/ vs values-night/bools.xml) -->
+        <item name="android:windowLightStatusBar">@bool/light_status_bar</item>
     </style>
 
     <style name="Theme.GymTracker" parent="Base.Theme.GymTracker" />

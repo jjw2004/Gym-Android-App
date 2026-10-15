@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- GymTracker colours - DARK mode (same names as values/colors.xml) -->
+    <color name="gym_background">#FF000000</color>      <!-- black -->
+    <color name="gym_card">#FF1C1C1E</color>            <!-- dark grey so cards show on black -->
+    <color name="gym_green">#FF00E676</color>           <!-- neon green -->
+    <color name="gym_text">#FFFFFFFF</color>            <!-- white -->
+    <color name="gym_text_secondary">#FFC7C7CC</color>  <!-- light grey -->
+</resources>
