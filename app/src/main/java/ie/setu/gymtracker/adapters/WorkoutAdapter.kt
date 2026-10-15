@@ -11,12 +11,16 @@ import ie.setu.gymtracker.R
 import ie.setu.gymtracker.models.ExerciseModel
 import ie.setu.gymtracker.models.WorkoutModel
 
+// Adapter for the workout list: makes one row (item_workout.xml) for each workout
+// and fills it in. onEdit / onDelete are functions passed in from WorkoutListActivity -
+// the adapter just calls them when the Edit / Delete buttons are tapped
 class WorkoutAdapter(
     private var workouts: List<WorkoutModel>,
     private val onEdit: (WorkoutModel) -> Unit,
     private val onDelete: (WorkoutModel) -> Unit
 ) : RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
 
+    // Holds the views inside one row, so they only need to be found once
     class WorkoutViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
@@ -36,6 +40,7 @@ class WorkoutAdapter(
             itemView.findViewById(R.id.deleteButton)
     }
 
+    // Called when the list needs a new empty row - builds it from item_workout.xml
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -51,6 +56,8 @@ class WorkoutAdapter(
         return WorkoutViewHolder(view)
     }
 
+    // Called to fill a row with the workout at this position
+    // (also used when a row is recycled for a different workout)
     override fun onBindViewHolder(
         holder: WorkoutViewHolder,
         position: Int
@@ -82,15 +89,19 @@ class WorkoutAdapter(
         }
     }
 
+    // Tells the list how many rows there are
     override fun getItemCount(): Int {
         return workouts.size
     }
 
+    // Swaps in a new list (e.g. after a search or delete) and tells the list to redraw
     fun updateWorkouts(newWorkouts: List<WorkoutModel>) {
         workouts = newWorkouts
         notifyDataSetChanged()
     }
 
+    // Turns one exercise into text like "• Squat: 5 x 5 @ 100.0kg"
+    // (or "(bodyweight)" if there is no weight)
     private fun describe(context: Context, exercise: ExerciseModel): String {
         val weight =
             if (exercise.weightKg > 0) {

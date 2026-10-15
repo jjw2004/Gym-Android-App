@@ -52,4 +52,8 @@
     <!-- delete confirmation -->
     <string name="delete_title">Delete workout?</string>
     <string name="delete_message">Your workout at %1$s on %2$s will be removed. This cannot be undone.</string>
+
+    <!-- wger -->
+    <string name="wger_credit">Exercise suggestions from wger.de</string>
+
 </resources>

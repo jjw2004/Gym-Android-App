@@ -18,8 +18,11 @@ import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
+// Screen that shows every workout in a list, with search, a date filter,
+// and edit / delete buttons on each workout
 class WorkoutListActivity : AppCompatActivity() {
 
+    // views from the layout, set in onCreate
     private lateinit var recyclerView: RecyclerView
     private lateinit var emptyText: TextView
     private lateinit var adapter: WorkoutAdapter
@@ -33,6 +36,8 @@ class WorkoutListActivity : AppCompatActivity() {
     private var filterDate: LocalDate? = null   // null = no date picked, any date
     private var searchText = ""                 // "" = nothing typed, any gym
 
+    // Runs once when the screen opens: finds the views, sets up the search box
+    // and buttons, and connects the adapter to the list
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -95,6 +100,8 @@ class WorkoutListActivity : AppCompatActivity() {
         }
     }
 
+    // Runs every time this screen comes back into view (e.g. after editing a workout),
+    // so the list is always up to date
     override fun onResume() {
         super.onResume()
 
@@ -137,6 +144,7 @@ class WorkoutListActivity : AppCompatActivity() {
         emptyText.visibility = if (workouts.isEmpty()) View.VISIBLE else View.GONE
     }
 
+    // Opens the form in edit mode by sending the workout's id
     private fun editWorkout(workout: WorkoutModel) {
 
         val intent =

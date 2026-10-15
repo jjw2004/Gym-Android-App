@@ -7,5 +7,5 @@ data class ExerciseModel(
     val name: String = "",
     val sets: Int = 0,
     val reps: Int = 0,
-    val weightKg: Double = 0.0
+    val weightKg: Double = 0.0   // 0.0 means bodyweight (e.g. pull ups)
 )

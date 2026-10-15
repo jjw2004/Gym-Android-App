@@ -6,8 +6,11 @@ import ie.setu.gymtracker.models.WorkoutModel
 import java.time.LocalDate
 import java.time.format.DateTimeParseException
 
+// the store used by the console menu
 val store = WorkoutMemStore()
 
+// Sprint 1 console version: shows the menu over and over until you enter 0.
+// Run it with: right-click Main.kt > More Run/Debug > Run 'MainKt' with Coverage
 fun main() {
     println("=== GymTracker Console App ===")
     var input: Int
@@ -27,6 +30,7 @@ fun main() {
     } while (input != 0)
 }
 
+// Prints the menu and returns the number typed (-1 if it isn't a number)
 fun menu(): Int {
     println("\n----------------------------------")
     println(" MAIN MENU")
@@ -43,6 +47,7 @@ fun menu(): Int {
     return readlnOrNull()?.toIntOrNull() ?: -1
 }
 
+// Asks for a gym, date and exercises, then saves a new workout
 fun addWorkout() {
     println("\n--- Log a Workout ---")
     print("Enter Gym Name: ")
@@ -61,6 +66,7 @@ fun addWorkout() {
     println("Workout logged successfully with ID: ${workout.id}")
 }
 
+// Prints every workout
 fun listWorkouts() {
     println("\n--- All Workouts ---")
     val workouts = store.findAll()
@@ -71,6 +77,7 @@ fun listWorkouts() {
     }
 }
 
+// Changes a workout's gym name and date (leave blank to keep the old value)
 fun updateWorkout() {
     println("\n--- Update Workout ---")
     listWorkouts()
@@ -92,6 +99,7 @@ fun updateWorkout() {
     }
 }
 
+// Adds more exercises to a workout that is already saved
 fun addExerciseToWorkout() {
     println("\n--- Add Exercise to Workout ---")
     listWorkouts()
@@ -114,6 +122,7 @@ fun addExerciseToWorkout() {
     }
 }
 
+// Removes a workout by its id
 fun deleteWorkout() {
     println("\n--- Delete Workout ---")
     listWorkouts()
@@ -134,6 +143,7 @@ fun deleteWorkout() {
     }
 }
 
+// Finds and prints one workout by its id
 fun searchWorkout() {
     println("\n--- Search Workout ---")
     print("Enter ID: ")
@@ -151,6 +161,7 @@ fun searchWorkout() {
     }
 }
 
+// Prints every workout at a gym (part of the name is enough)
 fun searchByGym() {
     println("\n--- Search Workouts by Gym ---")
     print("Enter Gym Name: ")
@@ -166,6 +177,7 @@ fun searchByGym() {
 
 // ---------- helpers ----------
 
+// Prints one workout and its exercises
 fun printWorkout(workout: WorkoutModel) {
     println("ID: ${workout.id} | Gym: ${workout.gymName} | Date: ${workout.date}")
     if (workout.exercises.isEmpty()) {
