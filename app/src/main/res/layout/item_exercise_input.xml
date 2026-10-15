@@ -5,10 +5,11 @@
     android:orientation="vertical"
     android:paddingVertical="8dp">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/exerciseNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:completionThreshold="1"
         android:hint="@string/hint_exercise_name"
         android:inputType="textCapWords" />
 

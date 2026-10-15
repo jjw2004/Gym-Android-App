@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -20,7 +22,7 @@ class AddEditActivity : AppCompatActivity() {
 
     /** The input boxes for one exercise row (item_exercise_input.xml). */
     private class ExerciseRow(view: View) {
-        val nameInput: EditText = view.findViewById(R.id.exerciseNameInput)
+        val nameInput: AutoCompleteTextView = view.findViewById(R.id.exerciseNameInput)
         val setsInput: EditText = view.findViewById(R.id.setsInput)
         val repsInput: EditText = view.findViewById(R.id.repsInput)
         val weightInput: EditText = view.findViewById(R.id.weightInput)
@@ -120,6 +122,8 @@ class AddEditActivity : AppCompatActivity() {
             )
 
         val row = ExerciseRow(view)
+
+        row.nameInput.setAdapter(makeSuggestionsAdapter())
 
         if (exercise != null) {
             row.nameInput.setText(exercise.name)
@@ -249,5 +253,10 @@ class AddEditActivity : AppCompatActivity() {
         }
 
         finish()
+    }
+    /** Builds the list of suggestions for an exercise name box. */
+    private fun makeSuggestionsAdapter(): ArrayAdapter<String> {
+        val names = AppData.workouts.exerciseNames()
+        return ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, names)
     }
 }

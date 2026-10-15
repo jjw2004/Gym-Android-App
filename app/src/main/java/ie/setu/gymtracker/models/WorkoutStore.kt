@@ -15,4 +15,7 @@ interface WorkoutStore {
 
     // workouts whose gym name contains gymName, and (if date isn't null) are on that day
     fun search(gymName: String, date: LocalDate?): List<WorkoutModel>
+
+    // every exercise name logged so far, no duplicates, A-Z
+    fun exerciseNames(): List<String>
 }

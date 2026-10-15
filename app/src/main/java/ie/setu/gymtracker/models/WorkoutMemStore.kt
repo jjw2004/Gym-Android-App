@@ -59,4 +59,12 @@ class WorkoutMemStore : WorkoutStore {
                 (date == null || w.date == date)
         }
     }
+
+    override fun exerciseNames(): List<String> {
+        return workouts
+            .flatMap { w -> w.exercises } // all exercises from all workouts, in one list
+            .map { e -> e.name } // just the names
+            .distinctBy { name -> name.lowercase() } // "Squat" and "squat" count as one
+            .sorted()// A to Z
+    }
 }
