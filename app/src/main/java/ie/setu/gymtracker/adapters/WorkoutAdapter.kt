@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ie.setu.gymtracker.R
+import ie.setu.gymtracker.helpers.PhotoHelpers
 import ie.setu.gymtracker.models.ExerciseModel
 import ie.setu.gymtracker.models.WorkoutModel
 import timber.log.Timber
@@ -32,6 +35,15 @@ class WorkoutAdapter(
 
         val exercisesText: TextView =
             itemView.findViewById(R.id.exercisesText)
+
+        val photosRow: LinearLayout =
+            itemView.findViewById(R.id.photosRow)
+
+        val beforeThumb: ImageView =
+            itemView.findViewById(R.id.beforeThumb)
+
+        val afterThumb: ImageView =
+            itemView.findViewById(R.id.afterThumb)
 
         val editButton: Button =
             itemView.findViewById(R.id.editButton)
@@ -79,6 +91,8 @@ class WorkoutAdapter(
             } else {
                 workout.exercises.joinToString("\n") { describe(context, it) }
             }
+
+        showThumbs(holder, workout)
 
         holder.editButton.setOnClickListener {
             listener.onEditWorkout(workout)
@@ -128,5 +142,21 @@ class WorkoutAdapter(
             exercise.reps,
             weight
         )
+    }
+
+    // Shows the before / after photos as small thumbnails, and hides the row if there are none.
+    // Rows are recycled, so every view is set every time (otherwise an old photo could show)
+    private fun showThumbs(holder: WorkoutViewHolder, workout: WorkoutModel) {
+        val before = workout.beforePhotoUri
+        val after = workout.afterPhotoUri
+
+        holder.photosRow.visibility =
+            if (before == null && after == null) View.GONE else View.VISIBLE
+
+        holder.beforeThumb.visibility = if (before == null) View.GONE else View.VISIBLE
+        if (before != null) PhotoHelpers.showPhoto(holder.beforeThumb, before, maxSizePx = 240)
+
+        holder.afterThumb.visibility = if (after == null) View.GONE else View.VISIBLE
+        if (after != null) PhotoHelpers.showPhoto(holder.afterThumb, after, maxSizePx = 240)
     }
 }

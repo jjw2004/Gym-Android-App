@@ -57,4 +57,16 @@
     <!-- wger -->
     <string name="wger_credit">Exercise suggestions from wger.de</string>
 
+
+    <!-- progress photos -->
+    <string name="progress_photos">Progress photos</string>
+    <string name="progress_photos_hint">Tap a box to take a photo or pick one. Your before photo is your proof you went!</string>
+    <string name="before_photo">Before</string>
+    <string name="after_photo">After</string>
+    <string name="before_photo_title">Before photo</string>
+    <string name="after_photo_title">After photo</string>
+    <string name="take_photo">Take photo</string>
+    <string name="choose_from_gallery">Choose from gallery</string>
+    <string name="remove_photo">Remove photo</string>
+    <string name="no_camera_app">No camera app found</string>
 </resources>

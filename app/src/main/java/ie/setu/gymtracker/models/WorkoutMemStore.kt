@@ -44,7 +44,9 @@ class WorkoutMemStore : WorkoutStore {
             workouts[foundIndex] = workouts[foundIndex].copy(
                 gymName = workout.gymName,
                 date = workout.date,
-                exercises = workout.exercises
+                exercises = workout.exercises,
+                beforePhotoUri = workout.beforePhotoUri,
+                afterPhotoUri = workout.afterPhotoUri
             )
             Timber.i("Updated workout id=${workout.id}")
             true
