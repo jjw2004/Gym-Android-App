@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import ie.setu.gymtracker.R
+import timber.log.Timber
 
 // The menu screen - the first screen you see when the app opens
 class MainActivity : AppCompatActivity() {
@@ -15,6 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        // turn on logging (shows in Logcat). onCreate runs again on rotation, so only plant it once
+        if (Timber.treeCount == 0) {
+            Timber.plant(Timber.DebugTree())
+        }
+        Timber.i("Main menu started")
+
         val viewWorkoutsButton =
             findViewById<Button>(R.id.viewWorkoutsButton)
 
@@ -23,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         // open the list of workouts
         viewWorkoutsButton.setOnClickListener {
+            Timber.d("Opening workout list")
             startActivity(
                 Intent(this, WorkoutListActivity::class.java)
             )
@@ -30,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         // open the form with no id, so it's a new workout
         logWorkoutButton.setOnClickListener {
+            Timber.d("Opening form to log a new workout")
             startActivity(
                 Intent(this, AddEditActivity::class.java)
             )
