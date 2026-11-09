@@ -19,6 +19,7 @@ import ie.setu.gymtracker.api.WgerApi
 import ie.setu.gymtracker.models.ExerciseModel
 import ie.setu.gymtracker.models.WorkoutModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.LocalDate
 
 // Screen for logging a new workout or editing an existing one
@@ -241,42 +242,33 @@ class AddEditActivity : AppCompatActivity() {
 
         val exercises = readExercises() ?: return
 
-        if (editingId == null) {
+        val workout = WorkoutModel(
+            id = editingId ?: 0L,      // 0 for a new workout - the store gives it a real id
+            gymName = gymName,
+            date = selectedDate,
+            exercises = exercises
+        )
 
-            val workout = WorkoutModel(
-                gymName = gymName,
-                date = selectedDate,
-                exercises = exercises
-            )
+        // the store calls validate() - if anything is wrong it throws an error instead of saving
+        try {
+            if (editingId == null) {
+                AppData.workouts.create(workout)
+                Toast.makeText(this, getString(R.string.workout_logged), Toast.LENGTH_SHORT).show()
+            } else {
+                AppData.workouts.update(workout)
+                Toast.makeText(this, getString(R.string.workout_updated), Toast.LENGTH_SHORT).show()
+            }
 
-            AppData.workouts.create(workout)
+            finish()
 
+        } catch (e: IllegalArgumentException) {
+            Timber.w("Validation failed: ${e.message}")
             Toast.makeText(
                 this,
-                getString(R.string.workout_logged),
-                Toast.LENGTH_SHORT
-            ).show()
-
-        } else {
-
-            val workout = WorkoutModel(
-                id = editingId!!,
-                gymName = gymName,
-                date = selectedDate,
-                exercises = exercises
-            )
-
-            AppData.workouts.update(workout)
-
-            Toast.makeText(
-                this,
-                getString(R.string.workout_updated),
-                Toast.LENGTH_SHORT
+                e.message ?: getString(R.string.error_check_workout),
+                Toast.LENGTH_LONG
             ).show()
         }
-
-
-        finish()
     }
 
     /** Downloads wger exercise names in the background, then refreshes every name box. */

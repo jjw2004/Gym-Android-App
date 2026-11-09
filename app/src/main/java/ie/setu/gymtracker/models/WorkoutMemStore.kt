@@ -30,6 +30,7 @@ class WorkoutMemStore : WorkoutStore {
 
     // Saves a new workout and gives it the next id
     override fun create(workout: WorkoutModel) {
+        workout.validate()   // throws an error (and saves nothing) if the workout isn't valid
         workout.id = lastId.incrementAndGet()
         workouts.add(workout)
         Timber.i("Created workout id=${workout.id} at ${workout.gymName}")
@@ -37,6 +38,7 @@ class WorkoutMemStore : WorkoutStore {
 
     // Replaces an existing workout's details. Returns false if the id wasn't found
     override fun update(workout: WorkoutModel): Boolean {
+        workout.validate()
         val foundIndex = workouts.indexOfFirst { w -> w.id == workout.id }
         return if (foundIndex != -1) {
             workouts[foundIndex] = workouts[foundIndex].copy(

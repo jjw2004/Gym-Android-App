@@ -62,8 +62,12 @@ fun addWorkout() {
     val exercises = readExercises()
 
     val workout = WorkoutModel(gymName = gymName, date = date, exercises = exercises)
-    store.create(workout)
-    println("Workout logged successfully with ID: ${workout.id}")
+    try {
+        store.create(workout)
+        println("Workout logged successfully with ID: ${workout.id}")
+    } catch (e: IllegalArgumentException) {
+        println("Not saved: ${e.message}")
+    }
 }
 
 // Prints every workout
@@ -92,8 +96,12 @@ fun updateWorkout() {
         val gymName = readlnOrNull()?.trim().orEmpty().ifEmpty { workout.gymName }
         val date = readDate(workout.date)
 
-        val updated = store.update(workout.copy(gymName = gymName, date = date))
-        if (updated) println("Workout updated successfully.")
+        try {
+            val updated = store.update(workout.copy(gymName = gymName, date = date))
+            if (updated) println("Workout updated successfully.")
+        } catch (e: IllegalArgumentException) {
+            println("Not updated: ${e.message}")
+        }
     } else {
         println("Workout with ID $id not found.")
     }
@@ -112,8 +120,12 @@ fun addExerciseToWorkout() {
     if (workout != null) {
         val newExercises = readExercises()
         if (newExercises.isNotEmpty()) {
-            store.update(workout.copy(exercises = workout.exercises + newExercises))
-            println("${newExercises.size} exercise(s) added to workout ${workout.id}.")
+            try {
+                store.update(workout.copy(exercises = workout.exercises + newExercises))
+                println("${newExercises.size} exercise(s) added to workout ${workout.id}.")
+            } catch (e: IllegalArgumentException) {
+                println("Not added: ${e.message}")
+            }
         } else {
             println("No exercises added.")
         }

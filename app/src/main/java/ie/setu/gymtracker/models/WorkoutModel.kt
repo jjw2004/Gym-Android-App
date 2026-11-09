@@ -12,4 +12,12 @@ data class WorkoutModel(
     val date: LocalDate = LocalDate.now(),              // today if not set
     val exercises: List<ExerciseModel> = emptyList()    // one workout can have many exercises
     // TODO add more stuff here such as notes, duration, gym location
-)
+) {
+    // Checks the workout makes sense before it's saved - throws an IllegalArgumentException if not
+    fun validate() {
+        require(gymName.isNotBlank()) {
+            "Gym name must not be empty."
+        }
+        exercises.forEach { it.validate() }   // every exercise must be valid too
+    }
+}

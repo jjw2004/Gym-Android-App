@@ -39,6 +39,7 @@
     <string name="workout_not_found">Workout not found</string>
     <string name="workout_logged">Workout logged</string>
     <string name="workout_updated">Workout updated</string>
+    <string name="error_check_workout">Please check the workout details.</string>
 
     <!-- filtering -->
     <string name="filter_by_date">Filter by Date</string>
