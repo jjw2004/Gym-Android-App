@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import ie.setu.gymtracker.R
 import ie.setu.gymtracker.models.ExerciseModel
 import ie.setu.gymtracker.models.WorkoutModel
+import timber.log.Timber
 
 // Adapter for the workout list: makes one row (item_workout.xml) for each workout
-// and fills it in. onEdit / onDelete are functions passed in from WorkoutListActivity -
-// the adapter just calls them when the Edit / Delete buttons are tapped
+// and fills it in. The listener is WorkoutListActivity - the adapter just tells it
+// when a workout should be edited or deleted
 class WorkoutAdapter(
     private var workouts: List<WorkoutModel>,
-    private val onEdit: (WorkoutModel) -> Unit,
-    private val onDelete: (WorkoutModel) -> Unit
+    private val listener: WorkoutListener
 ) : RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder>() {
 
     // Holds the views inside one row, so they only need to be found once
@@ -81,11 +81,23 @@ class WorkoutAdapter(
             }
 
         holder.editButton.setOnClickListener {
-            onEdit(workout)
+            listener.onEditWorkout(workout)
         }
 
         holder.deleteButton.setOnClickListener {
-            onDelete(workout)
+            listener.onDeleteWorkout(workout)
+        }
+
+        // tap anywhere on the row = edit, long-press = delete
+        holder.itemView.setOnClickListener {
+            Timber.d("Row tapped, workout id=${workout.id}")
+            listener.onEditWorkout(workout)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            Timber.d("Row long-pressed, workout id=${workout.id}")
+            listener.onDeleteWorkout(workout)
+            true   // true = "I handled the long-press", so a normal tap isn't fired too
         }
     }
 

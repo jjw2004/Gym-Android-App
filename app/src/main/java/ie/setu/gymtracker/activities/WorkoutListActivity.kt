@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ie.setu.gymtracker.AppData
 import ie.setu.gymtracker.R
 import ie.setu.gymtracker.adapters.WorkoutAdapter
+import ie.setu.gymtracker.adapters.WorkoutListener
 import ie.setu.gymtracker.models.WorkoutModel
 import java.time.LocalDate
 import android.widget.EditText
@@ -74,15 +75,19 @@ class WorkoutListActivity : AppCompatActivity() {
             refreshList()
         }
 
+        // "object : WorkoutListener" makes a one-off object that fills in the interface's functions
         adapter = WorkoutAdapter(
             workouts = loadWorkouts(),
 
-            onEdit = { workout ->
-                editWorkout(workout)
-            },
+            listener = object : WorkoutListener {
 
-            onDelete = { workout ->
-                deleteWorkout(workout)
+                override fun onEditWorkout(workout: WorkoutModel) {
+                    editWorkout(workout)
+                }
+
+                override fun onDeleteWorkout(workout: WorkoutModel) {
+                    deleteWorkout(workout)
+                }
             }
         )
 
