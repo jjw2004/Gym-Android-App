@@ -51,4 +51,26 @@ class WorkoutMemStoreTest {
     fun findByGymIsCaseInsensitive() {
         assertEquals(1, store.findByGym("setu").size)
     }
+
+    @Test
+    fun updateKeepsProgressPhotos() {
+        val changed = WorkoutModel(
+            id = 1,
+            gymName = "Flyefit",
+            beforePhotoUri = "content://photos/before.jpg",
+            afterPhotoUri = "content://photos/after.jpg"
+        )
+        assertTrue(store.update(changed))
+
+        val stored = store.findOne(1)!!
+        assertEquals("content://photos/before.jpg", stored.beforePhotoUri)
+        assertEquals("content://photos/after.jpg", stored.afterPhotoUri)
+    }
+
+    @Test
+    fun newWorkoutHasNoPhotos() {
+        val workout = store.findOne(2)!!
+        assertNull(workout.beforePhotoUri)
+        assertNull(workout.afterPhotoUri)
+    }
 }

@@ -1,6 +1,7 @@
 package ie.setu.gymtracker.models
 
 import java.time.LocalDate
+import timber.log.Timber
 import java.util.concurrent.atomic.AtomicLong
 
 // Keeps every workout in a list in memory (they are lost when the app closes)
@@ -29,28 +30,41 @@ class WorkoutMemStore : WorkoutStore {
 
     // Saves a new workout and gives it the next id
     override fun create(workout: WorkoutModel) {
+        workout.validate()   // throws an error (and saves nothing) if the workout isn't valid
         workout.id = lastId.incrementAndGet()
         workouts.add(workout)
+        Timber.i("Created workout id=${workout.id} at ${workout.gymName}")
     }
 
     // Replaces an existing workout's details. Returns false if the id wasn't found
     override fun update(workout: WorkoutModel): Boolean {
+        workout.validate()
         val foundIndex = workouts.indexOfFirst { w -> w.id == workout.id }
         return if (foundIndex != -1) {
             workouts[foundIndex] = workouts[foundIndex].copy(
                 gymName = workout.gymName,
                 date = workout.date,
-                exercises = workout.exercises
+                exercises = workout.exercises,
+                beforePhotoUri = workout.beforePhotoUri,
+                afterPhotoUri = workout.afterPhotoUri
             )
+            Timber.i("Updated workout id=${workout.id}")
             true
         } else {
+            Timber.w("Update failed, no workout with id=${workout.id}")
             false
         }
     }
 
     // Removes the workout with this id. Returns true if one was removed
     override fun delete(id: Long): Boolean {
-        return workouts.removeIf { w -> w.id == id }
+        val removed = workouts.removeIf { w -> w.id == id }
+        if (removed) {
+            Timber.i("Deleted workout id=$id")
+        } else {
+            Timber.w("Delete failed, no workout with id=$id")
+        }
+        return removed
     }
 
     // Returns all workouts on this exact date

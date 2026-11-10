@@ -8,7 +8,7 @@ appcompat = "1.6.1"
 material = "1.10.0"
 activityKtx = "1.8.0"
 constraintlayout = "2.1.4"
-timber = "1.5.1"
+timber = "5.0.1"
 recyclerview = "1.4.0"
 
 [libraries]
@@ -20,7 +20,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-timber = { module = "com.github.ajalt:timberkt", version.ref = "timber" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 
 [plugins]

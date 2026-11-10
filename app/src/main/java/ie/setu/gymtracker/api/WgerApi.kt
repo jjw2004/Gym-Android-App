@@ -3,6 +3,7 @@ package ie.setu.gymtracker.api
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import timber.log.Timber
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -49,9 +50,11 @@ object WgerApi {
 
                 val sorted = names.distinctBy { it.lowercase() }.sorted()
                 cachedNames = sorted
+                Timber.i("Downloaded ${sorted.size} exercise names from wger")
                 sorted
             } catch (e: Exception) {
                 // no internet, server down, bad data... just suggest nothing from wger
+                Timber.w("wger download failed: ${e.message}")
                 emptyList()
             }
         }
