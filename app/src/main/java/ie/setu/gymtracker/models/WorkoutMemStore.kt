@@ -4,14 +4,15 @@ import java.time.LocalDate
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicLong
 
-// Keeps every workout in a list in memory (they are lost when the app closes)
-class WorkoutMemStore : WorkoutStore {
+// Keeps every workout in a list in memory (they are lost when the app closes).
+// "open" means another class can build on it - WorkoutJSONStore does, to add saving to a file
+open class WorkoutMemStore : WorkoutStore {
 
-    // the list of saved workouts
-    private val workouts = ArrayList<WorkoutModel>()
+    // the list of saved workouts ("protected" = this class and classes built on it can use it)
+    protected val workouts = ArrayList<WorkoutModel>()
 
     // counter for giving each new workout the next id (1, 2, 3...)
-    private val lastId = AtomicLong(0L)
+    protected val lastId = AtomicLong(0L)
 
     // Returns every workout
     override fun findAll(): List<WorkoutModel> {

@@ -16,10 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        // turn on logging (shows in Logcat). onCreate runs again on rotation, so only plant it once
-        if (Timber.treeCount == 0) {
-            Timber.plant(Timber.DebugTree())
-        }
+        // (logging and the saved workouts are set up in GymTrackerApp, before any screen opens)
         Timber.i("Main menu started")
 
         val viewWorkoutsButton =
